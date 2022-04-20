@@ -1,6 +1,9 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :4/15/2022 4:04 PM
 # @Author   :Huiming Shi
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
 from common.common_driver import CommDriver
 from config.project_config import CITRON_URL
 import warnings
@@ -17,7 +20,7 @@ class BasePage(object):
     def __init__(self):
         self.driver = CommDriver().get_driver()
 
-    def open_url(self,url):
+    def open_url(self,url=CITRON_URL):
         """
         打开某个url
         :param url: url地址
@@ -65,6 +68,38 @@ class BasePage(object):
             self.get_element(locator).send_keys(text)
         else:
             self.get_element(locator).send_keys(text)
+
+    def get_elements(self,locator):
+        """
+        寻找元素集合
+        :param locator:定位器。如(By.ID,'username')   [By.ID,'username']    ('id','username')
+        :return:返回页面元素列表
+        """
+        return self.driver.find_elements(*locator)
+
+    def get_current_url(self):
+        """
+        获取当前页面的url
+        :return:
+        """
+        return self.driver.current_url
+
+    def get_element_text(self,locator):
+        """
+        获取元素文本
+        :param locator: 定位器
+        :return: 返回元素文本
+        """
+        return self.get_element(locator).text
+
+    def wait_click_element(self,locator):
+        """
+        采用显示等待的方式来等待元素出现后再点击
+        visibility_of_element_located：判断某个元素是否可见. 可见代表元素非隐藏，并且元素的宽和高都不等于0
+        :param locator:定位器
+        :return:
+        """
+        WebDriverWait(self.driver,15,0.5).until(EC.visibility_of_element_located(locator)).click()
 
 if __name__ == '__main__':
     driver = BasePage()

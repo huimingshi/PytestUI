@@ -1,0 +1,17 @@
+@startuml
+
+package commom <<folder>>
+{
+    package  commom_driver.py  <<Frame>>
+    {
+    class CommDriver
+    note left:浏览器类
+    class CommDriver
+        {
+        +get_driver()
+        }
+    }
+}
+
+
+@enduml
