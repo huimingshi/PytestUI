@@ -1,6 +1,8 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :4/20/2022 5:20 PM
 # @Author   :Huiming Shi
+import time
+
 from common.basePage import BasePage
 from config.project_config import IMPLICITLY_WAIT
 
@@ -15,4 +17,5 @@ class ContactsPage(BasePage):
                 break
         self.wait_click_element(self.loc_contacts_search)
         self.input_text(self.loc_contacts_search,username)
+        time.sleep(5)
         self.wait_click_element(self.loc_contacts_call)

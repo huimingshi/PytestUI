@@ -1,15 +1,13 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :4/15/2022 4:04 PM
 # @Author   :Huiming Shi
+import time
 from pprint import pprint
-
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 from common.common_driver import CommDriver
 from config.project_config import CITRON_URL
 import warnings
-
 from utils.handle_path import *
 from utils.handle_yml import get_yaml_data
 
@@ -120,6 +118,7 @@ class BasePage(object):
         except:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}点击不到{current_time}.png')
+
 
 if __name__ == '__main__':
     # driver = BasePage()

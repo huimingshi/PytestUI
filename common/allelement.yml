@@ -14,8 +14,32 @@ MainPage:
   loc_second_tree: ['xpath','//div[@id="k-panelbar-item-default-.1"]']
   loc_third_tree: ['xpath','//div[@id="k-panelbar-item-default-.2"]']
   loc_contacts_page: ['xpath','//span[text()="Contacts"]']
+  loc_users_page: ['xpath','//span[text()="Users"]']
 
 ContactsPage:
   loc_contacts_text: ['xpath','//h1[text()="Contacts"]']
   loc_contacts_search: ['xpath','//input[@id="filter-text-box"]']
   loc_contacts_call: ['xpath','//button[text()="Call"]']
+
+NoPage:
+  anwser_call_button: ['xpath','//button[@class="k-button success-btn big-btn"]']
+
+InCallPage:
+  end_call_button: ['xpath',"//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']"]
+  exit_call_yes: ['xpath','//button[@class="promptButton submenu-seperator"]']
+
+UsersPage:
+  add_user_button: ['xpath','//button[text()="Add User"]']
+  email_input: ['xpath','//input[@name="email"]']
+  name_input: ['xpath','//input[@name="name"]']
+  title_input: ['xpath','//input[@name="title"]']
+  location_input: ['xpath','//input[@name="location"]']
+  team_license_type: ['xpath','//div//b[text()="Team"]']
+  choose_license_type: ['xpath','//div//b[text()="Expert"]']
+  select_role: ['xpath','//select[@name="role"]']
+  ga_role: ['xpath','//option[text()="Group Admin"]']
+  wa_role: ['xpath','//option[text()="Workspace Admin"]']
+  groups_input: ['xpath','//input[@placeholder="Groups"]']
+  select_witch_group: ['xpath','//li[text()="{}"]']
+  add_button: ['xpath','//button[text()="Add"]']
+  prompt_information: ['xpath','//div[@class="k-notification-content"]']
