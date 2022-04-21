@@ -4,6 +4,11 @@
 import os
 project_abs_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-report_path = os.path.join(project_abs_path,'report','tmp')
+report_path = os.path.join(project_abs_path,'outputs','reports','tmp')
 
-print(report_path)
+screenshots_path = os.path.join(project_abs_path,'outputs','screenshots')
+
+allelementyml_path = os.path.join(project_abs_path,'common','allelement.yml')
+
+if __name__ == '__main__':
+    print(allelementyml_path)
