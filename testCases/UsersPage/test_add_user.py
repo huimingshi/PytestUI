@@ -2,17 +2,13 @@
 # @Time     :4/21/2022 6:43 PM
 # @Author   :Huiming Shi
 import os
-import time
-
 import pytest
 import allure
-
 from pageObjects.emailPage import EmailPage
 from pageObjects.loginPage import LoginPage
 from pageObjects.mainPage import MainPage
 from pageObjects.myAccountPage import MyAccountPage
 from pageObjects.usersPage import UsersPage
-from utils.handle_email import set_your_password_email
 from utils.handle_path import report_path
 
 
