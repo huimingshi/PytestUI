@@ -21,13 +21,6 @@ ContactsPage:
   loc_contacts_search: ['xpath','//input[@id="filter-text-box"]']
   loc_contacts_call: ['xpath','//button[text()="Call"]']
 
-NoPage:
-  anwser_call_button: ['xpath','//button[@class="k-button success-btn big-btn"]']
-
-InCallPage:
-  end_call_button: ['xpath',"//div[@class='InCall']//div[@class='menu']//*[@*='#phone_end_red']"]
-  exit_call_yes: ['xpath','//button[@class="promptButton submenu-seperator"]']
-
 UsersPage:
   add_user_button: ['xpath','//button[text()="Add User"]']
   email_input: ['xpath','//input[@name="email"]']
@@ -43,3 +36,16 @@ UsersPage:
   select_witch_group: ['xpath','//li[text()="{}"]']
   add_button: ['xpath','//button[text()="Add"]']
   prompt_information: ['xpath','//div[@class="k-notification-content"]']
+  active_user_search: ['xpath','//div[@id="user-tabs-pane-1"]//input[@id="filter-text-box"]']
+  user_list_count: ['xpath','//div[@class="ag-center-cols-container"]/div']
+  first_user_email: ['xpath','//div[@class="ag-center-cols-container"]/div[@row-index="0"]/div[@col-id="email"]']
+
+EmailPage:
+  set_password: ['xpath','//input[@name="password"]']
+  confirm_set_password: ['xpath','//input[@name="passwordConfirmation"]']
+  set_password_button: ['xpath','//button[@class="k-button k-primary"] ']
+  set_password_success: ['xpath',"//h2[contains(.,'You changed your password successfully.')]"]
+
+MyAccountPage:
+  my_account_button: ['xpath','//button[@id="currentAccount"]']
+  logout_button: ['xpath','//span[text()="Logout"]']

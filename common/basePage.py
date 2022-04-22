@@ -45,7 +45,8 @@ class BasePage(object):
         :return:返回页面元素
         """
         try:
-            return self.driver.find_element(*locator)
+            # return self.driver.find_element(*locator)
+            return WebDriverWait(self.driver,15,0.5).until(EC.visibility_of_element_located(locator))
         except:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}定位不到{current_time}.png')
@@ -119,6 +120,41 @@ class BasePage(object):
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}点击不到{current_time}.png')
 
+    def open_a_new_window(self,new_url):
+        """
+        在原有的浏览器基础上再打开一个窗口
+        :param new_url: url
+        :return:
+        """
+        js = f"window.open('{new_url}','_blank');"
+        self.driver.execute_script(js)
+
+    def switch_window_handle(self,handle = '最后一个窗口'):
+        """
+        切换句柄
+        :param handle:
+        :return:
+        """
+        if handle == '最后一个窗口':
+            self.driver.switch_to.window(self.driver.window_handles[-1])
+        elif handle == '第一个窗口':
+            self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def public_assert(self,string1,string2,condition = '='):
+        try:
+            if condition == '=':
+                assert string1 == string2
+            elif condition == 'in':
+                assert string1 in string2
+        except AssertionError:
+            current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
+            self.driver.save_screenshot(f'{screenshots_path}断言assert失败{current_time}.png')
+
+    def close_all_browser(self):
+        # os.system("taskkill /f /im chromedriver.exe")
+        for i in range(len(self.driver.window_handles)):
+            self.driver.switch_to.window(self.driver.window_handles[i - 1])
+            self.driver.close()
 
 if __name__ == '__main__':
     # driver = BasePage()
@@ -131,5 +167,6 @@ if __name__ == '__main__':
         pass
 
     mp = MainPage()
-    pprint(mp.locators)
-    pprint(mp.loc_contacts_page)
+    # pprint(mp.locators)
+    # pprint(mp.loc_contacts_page)
+    mp.open_a_new_window('http://www.baidu.com')

@@ -1,6 +1,8 @@
 # _*_ coding: utf-8 _*_ #
 # @Time     :4/21/2022 5:09 PM
 # @Author   :Huiming Shi
+import time
+from config.project_config import IMPLICITLY_WAIT
 import pytest
 from common.basePage import BasePage
 from utils.handle_random_str import get_random_str
@@ -43,4 +45,19 @@ class UsersPage(BasePage):
         # 点击ADD按钮
         self.click_element(self.add_button,'ADD按钮')
         # 断言
-        pytest.assume(len(self.get_elements(self.prompt_information)) == 1)
+        self.public_assert(len(self.get_elements(self.prompt_information)),1)
+        return email,name
+
+    def search_active_user(self,user_email):
+        # Active Users页面查询用户
+        self.input_text(self.active_user_search,text=user_email,action='Active_Users查询框')
+        for i in range(30):
+            self.driver.implicitly_wait(1)
+            ele_count = self.get_elements(self.user_list_count)
+            if len(ele_count) == 1:
+                break
+        self.driver.implicitly_wait(IMPLICITLY_WAIT)
+        # 断言查询出来就一条数据
+        self.public_assert(len(self.get_elements(self.user_list_count)),1)
+        # 断言这条数据就是刚新增的user
+        self.public_assert(self.get_element_text(self.first_user_email,'第一个user的email'), user_email)

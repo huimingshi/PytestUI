@@ -2,11 +2,17 @@
 # @Time     :4/21/2022 6:43 PM
 # @Author   :Huiming Shi
 import os
+import time
+
 import pytest
 import allure
+
+from pageObjects.emailPage import EmailPage
 from pageObjects.loginPage import LoginPage
 from pageObjects.mainPage import MainPage
+from pageObjects.myAccountPage import MyAccountPage
 from pageObjects.usersPage import UsersPage
+from utils.handle_email import set_your_password_email
 from utils.handle_path import report_path
 
 
@@ -27,9 +33,18 @@ class Test_add_user(object):
         with allure.step('3-add user的操作，内部已加断言'):
             test_userspage = UsersPage()
             test_userspage.click_add_user_button()
-            test_userspage.create_user(groups = 'auto_default_group')
-
-
+            email,name = test_userspage.create_user(groups = 'auto_default_group')
+        with allure.step('4-从outlook邮箱获取邮件，并打开这个邮件的设置密码链接'):
+            test_emailpage = EmailPage()
+            test_emailpage.set_your_password()
+        with allure.step('5-Active Users页面查询这个新建的user'):
+            test_userspage.search_active_user(email)
+        with allure.step('6-退出登录'):
+            test_myaccountpage = MyAccountPage()
+            test_myaccountpage.click_my_account()
+            test_myaccountpage.logout_citron()
+        with allure.step('7-新建的user进行登录'):
+            test_loginpage.login_citron(email, '*IK<8ik,8ik,')
 
 if __name__ == '__main__':
     pytest.main(['-sv',__file__,'--alluredir', report_path,'--clean-alluredir'])
