@@ -151,7 +151,6 @@ class BasePage(object):
             self.driver.save_screenshot(f'{screenshots_path}{action}断言assert失败{current_time}.png')
 
     def close_all_browser(self):
-        # os.system("taskkill /f /im chromedriver.exe")
         for i in range(len(self.driver.window_handles)):
             self.driver.switch_to.window(self.driver.window_handles[i - 1])
             self.driver.close()

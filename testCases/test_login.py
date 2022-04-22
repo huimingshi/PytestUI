@@ -18,12 +18,13 @@ class TestLogin(object):
         with allure.step('1-实例化浏览器'):
             po = LoginPage()
         with allure.step('2-打开登录页面'):
-            po.open_url(CITRON_URL)
+            po.open_url()
         with allure.step('3-登陆操作'):
             po.login_citron(username,password)
         with allure.step('4-断言'):
             pytest.assume(po.get_current_url() == CITRON_URL)    # pytest-assume插件，和assert一样，只不过默认情况下assert失败后，后面的代码不会继续执行，而用assume的话，代码会继续执行
-
+        with allure.step('5-退出driver'):
+            pass
 
 if __name__ == '__main__':
     pytest.main(['-sv',__file__,'--alluredir', report_path,'--clean-alluredir'])
