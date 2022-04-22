@@ -6,14 +6,14 @@ import allure
 import pytest
 from config.project_config import CITRON_URL
 from pageObjects.loginPage import LoginPage
-from testDatas.login_data import username_888,password_888
+from testDatas.login_data import public_password,group_admin_username
 from utils.handle_path import report_path
 
 @allure.epic('Citron项目')
 @allure.feature('登录')
 class TestLogin(object):
     @allure.title('登陆成功')
-    @pytest.mark.parametrize('username,password',[(username_888,password_888)])
+    @pytest.mark.parametrize('username,password',[(group_admin_username,public_password)])
     def test_login(self,username,password):
         with allure.step('1-实例化浏览器'):
             po = LoginPage()
