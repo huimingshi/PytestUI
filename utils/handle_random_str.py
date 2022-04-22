@@ -4,6 +4,10 @@
 
 import time
 def get_random_str():
+    """
+    根据时间获取随机数
+    :return:
+    """
     get_random = time.time() * 1000000
     random_str = str(get_random).split('.')[0]
     return random_str

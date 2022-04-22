@@ -125,15 +125,31 @@ def get_external_invitation_message(expect_get_content):
         return 'External invitation message is not correct'
 
 def set_your_password_email():
+    """
+    返回Click here to set your password:的链接
+    :return:
+    """
     return get_email_link('Click here to set your password:')
 
 def change_my_password_email():
+    """
+    返回Change My Password:的链接
+    :return:
+    """
     return get_email_link('Change My Password:')
 
 def accept_invitation_email():
+    """
+    返回Accept Invitation的链接
+    :return:
+    """
     return get_email_link('Accept Invitation')
 
 def confirmation_token_email():
+    """
+    返回confirmation_token的链接
+    :return:
+    """
     return get_email_link('confirmation_token')
 
 

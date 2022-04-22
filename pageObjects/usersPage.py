@@ -9,10 +9,21 @@ from utils.handle_random_str import get_random_str
 
 class UsersPage(BasePage):
     def click_add_user_button(self):
-        # 点击ADD USER按钮
+        """
+        点击ADD USER按钮
+        :return:
+        """
         self.wait_click_element(self.add_user_button,'ADD_USER按钮')
 
     def create_user(self, licence_type = 'Expert', role = 'User', choose_group = True, groups = None):
+        """
+        新建user
+        :param licence_type:
+        :param role:
+        :param choose_group:
+        :param groups:
+        :return:
+        """
         # 获取随机的email和name
         email = f'Huiming.shi.helplightning+{get_random_str()}@outlook.com'
         name = f'Huiming.shi.helplightning+{get_random_str()}'
@@ -44,20 +55,26 @@ class UsersPage(BasePage):
             self.wait_click_element(self.select_witch_group,'具体的group')
         # 点击ADD按钮
         self.click_element(self.add_button,'ADD按钮')
-        # 断言
-        self.public_assert(len(self.get_elements(self.prompt_information)),1)
+        # 断言出现创建成功的提示信息
+        self.public_assert(len(self.get_elements(self.prompt_information)),1,'出现创建成功的提示信息')
+        # 返回email和username
         return email,name
 
     def search_active_user(self,user_email):
+        """
+        Active Users标签页查询user
+        :param user_email:
+        :return:
+        """
         # Active Users页面查询用户
         self.input_text(self.active_user_search,text=user_email,action='Active_Users查询框')
+        self.driver.implicitly_wait(1)
         for i in range(30):
-            self.driver.implicitly_wait(1)
             ele_count = self.get_elements(self.user_list_count)
             if len(ele_count) == 1:
                 break
         self.driver.implicitly_wait(IMPLICITLY_WAIT)
         # 断言查询出来就一条数据
-        self.public_assert(len(self.get_elements(self.user_list_count)),1)
+        self.public_assert(len(self.get_elements(self.user_list_count)),1,'查询出来就一条数据')
         # 断言这条数据就是刚新增的user
-        self.public_assert(self.get_element_text(self.first_user_email,'第一个user的email'), user_email)
+        self.public_assert(self.get_element_text(self.first_user_email,'第一个user的email'), user_email,'这条数据就是刚新增的user')

@@ -9,6 +9,10 @@ from utils.handle_email import set_your_password_email
 
 class EmailPage(BasePage):
     def set_your_password(self):
+        """
+        设置密码
+        :return:
+        """
         time.sleep(20)
         # 从outlook邮箱获取邮件
         email_link = set_your_password_email()

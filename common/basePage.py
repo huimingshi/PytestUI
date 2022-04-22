@@ -140,7 +140,7 @@ class BasePage(object):
         elif handle == '第一个窗口':
             self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def public_assert(self,string1,string2,condition = '='):
+    def public_assert(self,string1,string2,condition = '=',action=None):
         try:
             if condition == '=':
                 assert string1 == string2
@@ -148,7 +148,7 @@ class BasePage(object):
                 assert string1 in string2
         except AssertionError:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-            self.driver.save_screenshot(f'{screenshots_path}断言assert失败{current_time}.png')
+            self.driver.save_screenshot(f'{screenshots_path}{action}断言assert失败{current_time}.png')
 
     def close_all_browser(self):
         # os.system("taskkill /f /im chromedriver.exe")
