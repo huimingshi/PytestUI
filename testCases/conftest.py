@@ -4,13 +4,15 @@
 import os
 import pytest
 from pageObjects.loginPage import LoginPage
+from testDatas.login_data import site_admin_username, public_password
+
 
 @pytest.fixture(scope='function',autouse=False)
 def init_citron_logout():
     # 用例的初始化操作
-    po = LoginPage()
-    po.open_url()
-    yield po
+    test_loginpage = LoginPage()
+    test_loginpage.open_url()
+    yield test_loginpage
     # 用例的清除操作
-    po.close_all_browser()
+    test_loginpage.close_all_browser()
     os.system("taskkill /f /im chromedriver.exe")

@@ -22,7 +22,9 @@ class Test_add_user(object):
         with allure.step('1-登录操作'):
             # test_loginpage = LoginPage()
             # test_loginpage.open_login_page()
-            init_citron_logout.login_citron(site_admin_username, public_password)
+            # 已经在conftest的初始化中创建了对象且进行了打开登陆页面的操作
+            test_loginpage = init_citron_logout
+            test_loginpage.login_citron(site_admin_username, public_password)
         with allure.step('2-切换到Users页面'):
             test_mainpage = MainPage()
             test_mainpage.switch_tree(if_click_tree = 'yes',witch_tree = 2)
@@ -41,7 +43,7 @@ class Test_add_user(object):
             test_myaccountpage.click_my_account()
             test_myaccountpage.logout_citron()
         with allure.step('7-新建的user进行登录'):
-            init_citron_logout.login_citron(email, public_password)
+            test_loginpage.login_citron(email, public_password)
 
 if __name__ == '__main__':
     pytest.main(['-sv',__file__,'--alluredir', report_path,'--clean-alluredir'])
