@@ -1,5 +1,5 @@
 LoginPage:
-  loc_username_input: ['xpath','//input[@autocomplete="username"]']
+  loc_username_input: ['xpath','//inpu[@autocomplete="username"]']
   loc_password_show_tag: ['xpath','//input[@style="display: block;"]']
   loc_password_input: ['xpath','//input[@autocomplete="current-password"]']
   loc_next_button: ['xpath','//button[text()="Next"]']

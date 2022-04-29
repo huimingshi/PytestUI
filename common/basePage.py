@@ -3,6 +3,8 @@
 # @Author   :Huiming Shi
 import time
 from pprint import pprint
+
+import allure
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from common.common_driver import CommDriver
@@ -50,6 +52,9 @@ class BasePage(object):
         except:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}定位不到{current_time}.png')
+            file_png = open(f'{screenshots_path}{action}定位不到{current_time}.png', mode='rb').read()
+            allure.attach(file_png, f'{screenshots_path}{action}定位不到{current_time}.png', allure.attachment_type.PNG)
+            raise Exception
 
     def click_element(self,locator,action=None):
         """
@@ -119,6 +124,9 @@ class BasePage(object):
         except:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}点击不到{current_time}.png')
+            file_png = open(f'{screenshots_path}{action}点击不到{current_time}.png', mode='rb').read()
+            allure.attach(file_png, f'{screenshots_path}{action}点击不到{current_time}.png', allure.attachment_type.PNG)
+            raise Exception
 
     def open_a_new_window(self,new_url):
         """
@@ -149,6 +157,9 @@ class BasePage(object):
         except AssertionError:
             current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
             self.driver.save_screenshot(f'{screenshots_path}{action}断言assert失败{current_time}.png')
+            file_png = open(f'{screenshots_path}{action}断言assert失败{current_time}.png', mode='rb').read()
+            allure.attach(file_png, f'{screenshots_path}{action}断言assert失败{current_time}.png', allure.attachment_type.PNG)
+            raise Exception
 
     def close_all_browser(self):
         for i in range(len(self.driver.window_handles)):
