@@ -35,7 +35,7 @@ class BasePage(object):
         self.driver.save_screenshot(f'{screenshots_path}{action}{reason}{current_time}.png')
         file_png = open(f'{screenshots_path}{action}{reason}{current_time}.png', mode='rb').read()
         allure.attach(file_png, f'{screenshots_path}{action}{reason}{current_time}.png', allure.attachment_type.PNG)
-        raise Exception
+        raise Exception(f'{action}{reason}')
 
     def open_url(self,url=CITRON_URL):
         """
