@@ -30,6 +30,13 @@ class BasePage(object):
             # setattr设置实例self属性element_name的值是locator
             setattr(self,element_name,locator)
 
+    def handle_screenshot(self,action,reason):
+        current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
+        self.driver.save_screenshot(f'{screenshots_path}{action}{reason}{current_time}.png')
+        file_png = open(f'{screenshots_path}{action}{reason}{current_time}.png', mode='rb').read()
+        allure.attach(file_png, f'{screenshots_path}{action}{reason}{current_time}.png', allure.attachment_type.PNG)
+        raise Exception
+
     def open_url(self,url=CITRON_URL):
         """
         打开某个url
@@ -50,11 +57,7 @@ class BasePage(object):
             # return self.driver.find_element(*locator)
             return WebDriverWait(self.driver,15,0.5).until(EC.visibility_of_element_located(locator))
         except:
-            current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-            self.driver.save_screenshot(f'{screenshots_path}{action}定位不到{current_time}.png')
-            file_png = open(f'{screenshots_path}{action}定位不到{current_time}.png', mode='rb').read()
-            allure.attach(file_png, f'{screenshots_path}{action}定位不到{current_time}.png', allure.attachment_type.PNG)
-            raise Exception
+            self.handle_screenshot(action, reason='定位不到')
 
     def click_element(self,locator,action=None):
         """
@@ -122,11 +125,7 @@ class BasePage(object):
         try:
             WebDriverWait(self.driver,15,0.5).until(EC.visibility_of_element_located(locator)).click()
         except:
-            current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-            self.driver.save_screenshot(f'{screenshots_path}{action}点击不到{current_time}.png')
-            file_png = open(f'{screenshots_path}{action}点击不到{current_time}.png', mode='rb').read()
-            allure.attach(file_png, f'{screenshots_path}{action}点击不到{current_time}.png', allure.attachment_type.PNG)
-            raise Exception
+            self.handle_screenshot(action, reason='点击不到')
 
     def open_a_new_window(self,new_url):
         """
@@ -155,11 +154,7 @@ class BasePage(object):
             elif condition == 'in':
                 assert string1 in string2
         except AssertionError:
-            current_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime(time.time()))
-            self.driver.save_screenshot(f'{screenshots_path}{action}断言assert失败{current_time}.png')
-            file_png = open(f'{screenshots_path}{action}断言assert失败{current_time}.png', mode='rb').read()
-            allure.attach(file_png, f'{screenshots_path}{action}断言assert失败{current_time}.png', allure.attachment_type.PNG)
-            raise Exception
+            self.handle_screenshot(action, reason='断言assert失败')
 
     def close_all_browser(self):
         for i in range(len(self.driver.window_handles)):
