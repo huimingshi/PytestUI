@@ -12,7 +12,7 @@ class Single(object):
     def __new__(cls, *args, **kwargs):     # 类方法但没有classmethod装饰器
         if cls._instance is None:    # 如果没有实例化过
             cls._instance = super().__new__(cls)     # new一下
-        return cls._instance    # 返回对象
+        return cls._instance    # 返回实例对象
 
 class CommDriver(Single):
     """
