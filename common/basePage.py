@@ -8,7 +8,7 @@ import allure
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from common.common_driver import CommDriver
-from config.project_config import CITRON_URL
+from config.project_config import *
 import warnings
 from utils.handle_path import *
 from utils.handle_yml import get_yaml_data
@@ -37,12 +37,14 @@ class BasePage(object):
         allure.attach(file_png, f'{screenshots_path}{action}{reason}{current_time}.png', allure.attachment_type.PNG)
         raise Exception(f'{action}{reason}')
 
-    def open_url(self,url=CITRON_URL):
+    def open_url(self,url=CITRON_URL,page_load_timeout = PAGE_LOAD_TIMEOUT):
         """
         打开某个url
         :param url: url地址
+        :param page_load_timeout: 超时时间
         :return: None
         """
+        self.driver.set_page_load_timeout(page_load_timeout)
         self.driver.get(url)
 
     def get_element(self,locator,action=None):
@@ -55,7 +57,7 @@ class BasePage(object):
         """
         try:
             # return self.driver.find_element(*locator)
-            return WebDriverWait(self.driver,15,0.5).until(EC.visibility_of_element_located(locator))
+            return WebDriverWait(self.driver,WEBDRIVERWAIT_TIMEOUT,0.5).until(EC.visibility_of_element_located(locator))
         except:
             self.handle_screenshot(action, reason='定位不到')
 
@@ -165,7 +167,7 @@ if __name__ == '__main__':
     # driver = BasePage()
     # driver.open_url(CITRON_URL)
     # driver.click_element(('xpath','//input[@autocomplete="username"]'))
-    # # driver.input_text_old(('xpath', '//input[@autocomplete="username"]'), 'Huiming.shi.helplightning+8888888888@outlook.com')
+    # driver.input_text_old(('xpath', '//input[@autocomplete="username"]'), 'Huiming.shi.helplightning+8888888888@outlook.com')
     # driver.input_text(('xpath', '//input[@autocomplete="username"]'), 'Huiming.shi.helplightning+8888888888@outlook.com')
     # pprint(driver.locators)
     class MainPage(BasePage):

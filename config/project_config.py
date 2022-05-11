@@ -10,3 +10,7 @@ DEF_BROWSER_TYPE = 'Chrome'
 HEADLESS_FLAG = False
 # 默认隐式等待时间
 IMPLICITLY_WAIT = 15
+# 设置默认的超时时间s
+PAGE_LOAD_TIMEOUT = 180
+# 显示等待时间
+WEBDRIVERWAIT_TIMEOUT = 15
