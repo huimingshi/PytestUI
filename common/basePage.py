@@ -57,7 +57,7 @@ class BasePage(object):
         """
         try:
             # return self.driver.find_element(*locator)
-            return WebDriverWait(self.driver,WEBDRIVERWAIT_TIMEOUT,0.5).until(EC.visibility_of_element_located(locator))
+            return WebDriverWait(self.driver,WEBDRIVERWAIT_TIMEOUT,POLL_FREQUENCY).until(EC.visibility_of_element_located(locator))
         except:
             self.handle_screenshot(action, reason='定位不到')
 
@@ -100,7 +100,7 @@ class BasePage(object):
         :param locator:定位器。如(By.ID,'username')   [By.ID,'username']    ('id','username')
         :return:返回页面元素列表
         """
-        return self.driver.find_elements(*locator)
+        return WebDriverWait(self.driver,WEBDRIVERWAIT_TIMEOUT,POLL_FREQUENCY).until(EC.visibility_of_all_elements_located(locator))
 
     def get_current_url(self):
         """
