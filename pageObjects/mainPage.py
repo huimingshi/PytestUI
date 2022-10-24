@@ -36,3 +36,11 @@ class MainPage(BasePage):
         :return:
         """
         self.wait_click_element(self.loc_users_page,'Users页面')
+
+    def logout(self):
+        """
+        退出登录
+        :return:
+        """
+        self.wait_click_element(self.loc_current_account,'当前账号按钮')
+        self.wait_click_element(self.loc_logout,'logout按钮')

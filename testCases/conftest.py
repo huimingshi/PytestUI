@@ -4,6 +4,7 @@
 import os
 import pytest
 from pageObjects.loginPage import LoginPage
+from pageObjects.mainPage import MainPage
 from testDatas.login_data import site_admin_username, public_password
 
 
@@ -11,9 +12,10 @@ from testDatas.login_data import site_admin_username, public_password
 def init_citron_logout():
     # 用例的初始化操作
     test_loginpage = LoginPage()
-    test_loginpage.open_url()
+    # test_loginpage.open_url()
     yield test_loginpage
     # 用例的清除操作
+    # MainPage().logout()
     test_loginpage.close_all_browser()
 
 
@@ -22,4 +24,5 @@ def exit_driver():
     test_loginpage = LoginPage()
     yield test_loginpage
     # 用例的清除操作
-    test_loginpage.close_all_browser()
+    # test_loginpage.close_all_browser()
+    MainPage().logout()

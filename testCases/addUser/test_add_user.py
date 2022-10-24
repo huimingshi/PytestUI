@@ -43,7 +43,7 @@ class Test_add_user(object):
             test_myaccountpage.click_my_account()
             test_myaccountpage.logout_citron()
         with allure.step('7-新建的user进行登录'):
-            test_loginpage.login_citron(email, public_password)
+            test_loginpage.login_citron(email, public_password,accept = 'no_accept',close_bounced='no_close_bounced')
 
 if __name__ == '__main__':
     pytest.main(['-sv',__file__,'--alluredir', report_path,'--clean-alluredir'])

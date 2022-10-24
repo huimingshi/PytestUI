@@ -159,7 +159,10 @@ class BasePage(object):
             self.handle_screenshot(action, reason='断言assert失败')
 
     def close_all_browser(self):
-        self.driver.close()
+        web_count = self.driver.window_handles
+        for one in web_count:
+            self.driver.switch_to.window(one)
+            self.driver.close()
 
 if __name__ == '__main__':
     # driver = BasePage()
