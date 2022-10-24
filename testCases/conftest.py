@@ -15,7 +15,6 @@ def init_citron_logout():
     yield test_loginpage
     # 用例的清除操作
     test_loginpage.close_all_browser()
-    os.system("taskkill /f /im chromedriver.exe")
 
 
 @pytest.fixture(scope='function',autouse=False)
@@ -24,4 +23,3 @@ def exit_driver():
     yield test_loginpage
     # 用例的清除操作
     test_loginpage.close_all_browser()
-    os.system("taskkill /f /im chromedriver.exe")

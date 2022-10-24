@@ -100,7 +100,7 @@ class BasePage(object):
         :param locator:定位器。如(By.ID,'username')   [By.ID,'username']    ('id','username')
         :return:返回页面元素列表
         """
-        return WebDriverWait(self.driver,WEBDRIVERWAIT_TIMEOUT,POLL_FREQUENCY).until(EC.visibility_of_all_elements_located(locator))
+        return self.driver.find_elements(*locator)
 
     def get_current_url(self):
         """
@@ -159,9 +159,7 @@ class BasePage(object):
             self.handle_screenshot(action, reason='断言assert失败')
 
     def close_all_browser(self):
-        for i in range(len(self.driver.window_handles)):
-            self.driver.switch_to.window(self.driver.window_handles[i - 1])
-            self.driver.close()
+        self.driver.close()
 
 if __name__ == '__main__':
     # driver = BasePage()
