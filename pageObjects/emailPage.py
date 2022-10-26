@@ -4,7 +4,7 @@
 import time
 import pytest
 from common.basePage import BasePage
-from config.project_config import PUBLIC_PASSWD
+from testDatas.login_data import public_password
 from utils.handle_email import set_your_password_email
 
 
@@ -23,9 +23,9 @@ class EmailPage(BasePage):
         self.switch_window_handle()
         # 输入密码
         self.wait_click_element(self.set_password)
-        self.input_text(self.set_password,PUBLIC_PASSWD)
+        self.input_text(self.set_password,public_password)
         # 确认密码
-        self.input_text(self.confirm_set_password, PUBLIC_PASSWD)
+        self.input_text(self.confirm_set_password, public_password)
         # 点击确定
         self.wait_click_element(self.set_password_button)
         # 断言
