@@ -1,28 +1,24 @@
 # _*_ coding: utf-8 _*_ #
-# @Time     :4/22/2022 3:30 PM
+# @Time     :12/5/2022 11:03 AM
 # @Author   :Huiming Shi
-import os
 import pytest
 from pageObjects.loginPage import LoginPage
 from pageObjects.mainPage import MainPage
-from testDatas.login_data import site_admin_username, public_password
 
 
 @pytest.fixture(scope='function',autouse=False)
 def init_citron_logout():
-    # 用例的初始化操作
     test_loginpage = LoginPage()
-    # test_loginpage.open_url()
-    yield test_loginpage
-    # 用例的清除操作
-    # MainPage().logout()
-    test_loginpage.close_all_browser()
-
-
-@pytest.fixture(scope='function',autouse=False)
-def exit_driver():
-    test_loginpage = LoginPage()
+    test_loginpage.open_url()
     yield test_loginpage
     # 用例的清除操作
     # test_loginpage.close_all_browser()
     MainPage().logout()
+
+@pytest.fixture(scope='function',autouse=False)
+def exit_driver():
+    test_loginpage = LoginPage()
+    # yield test_loginpage
+    yield
+    # 用例的清除操作
+    test_loginpage.close_all_browser()

@@ -129,6 +129,14 @@ class BasePage(object):
         except:
             self.handle_screenshot(action, reason='点击不到')
 
+    def switch_first_window(self):
+        """
+        进入第一个窗口
+        :param driver:
+        :return:
+        """
+        self.driver.switch_to.window(self.driver.window_handles[0])  # 切换到第一个tab页
+
     def open_a_new_window(self,new_url):
         """
         在原有的浏览器基础上再打开一个窗口

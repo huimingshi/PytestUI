@@ -64,6 +64,7 @@ class LoginPage(BasePage):
             if len(ele_list_disclaimer) == 1:
                 self.wait_click_element(self.loc_accept_disclaimer,'ACCEPT_DISCLAIMER按钮')
                 self.driver.implicitly_wait(2)
+                time.sleep(1)
                 # 担心会出现两个Disclaimer
                 ele_list_disclaimer = self.get_elements(self.loc_accept_disclaimer)
                 if len(ele_list_disclaimer) == 1:

@@ -42,5 +42,6 @@ class MainPage(BasePage):
         退出登录
         :return:
         """
+        self.switch_first_window()
         self.wait_click_element(self.loc_current_account,'当前账号按钮')
         self.wait_click_element(self.loc_logout,'logout按钮')
